@@ -1,0 +1,44 @@
+@import "../index.scss";
+
+.rootList {
+  & p,
+  & span {
+    cursor: pointer;
+    font-size: 1rem;
+    transition: font-size 300ms;
+    @include xl {
+      font-size: 1.2rem;
+    }
+  }
+  & div {
+    margin: 0;
+    padding: 0;
+    @include sm {
+    }
+  }
+  .listItem {
+    align-items: center;
+    justify-content: center;
+    flex-flow: row;
+
+    .email {
+      color: blue;
+      @include sm {
+        text-align: end;
+      }
+    }
+    .info {
+      min-width: 200px;
+      @include sm {
+        min-width: unset;
+        display: flex;
+        align-items: center;
+        flex-grow: 9;
+      }
+    }
+
+    .inset {
+      margin-left: 0;
+    }
+  }
+}

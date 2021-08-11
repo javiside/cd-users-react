@@ -1,0 +1,18 @@
+@import "../index.scss";
+.cardsWrapper {
+  display: flex;
+  flex-flow: column;
+  .heading {
+    text-align: center;
+  }
+  .cards {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+    flex-flow: column;
+    @include md {
+      flex-flow: row;
+      flex-wrap: wrap;
+    }
+  }
+}

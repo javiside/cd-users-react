@@ -1,0 +1,39 @@
+@import "../index.scss";
+.card {
+  flex-grow: 1;
+  margin: 10px;
+
+  @include md {
+    flex-basis: 30%;
+  }
+
+  .username,
+  .email,
+  .phone,
+  .website,
+  .address,
+  .address + span,
+  .title + span {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .title,
+  .name,
+  .catchPhrase,
+  .post,
+  .address,
+  .bs {
+    display: none;
+  }
+
+  .catchPhrase + span {
+    font-style: italic;
+    &::before {
+      content: '"';
+    }
+    &::after {
+      content: '"';
+    }
+  }
+}

@@ -1,0 +1,76 @@
+@import "../index.scss";
+.appBar {
+  flex-grow: 1;
+  margin-bottom: 20px;
+
+  .toolBar {
+    flex-flow: column;
+    @include sm {
+      flex-flow: row;
+    }
+
+    .separator,
+    .breadcrumbs a,
+    .breadcrumbs p {
+      transition: font-size 300ms;
+      color: lightblue;
+      display: inline-block;
+      &.link {
+        color: white;
+      }
+      font-size: 2rem;
+    }
+
+    .title {
+      flex-grow: 9;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      flex-grow: 1;
+      flex-flow: column;
+      @include sm {
+        flex-flow: row;
+        align-items: center;
+      }
+    }
+
+    .search {
+      position: relative;
+      border-radius: 4px;
+      background-color: rgba(255, 255, 255, 0.15);
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+      }
+      margin-left: 0;
+      margin-bottom: 10px;
+      @include sm {
+        width: auto;
+      }
+      width: 100%;
+
+      .input {
+        transition: width 300ms;
+
+        &Root {
+          color: inherit;
+        }
+        padding-left: 1em;
+        width: 100%;
+        @include sm {
+          width: 12ch;
+          &:focus {
+            width: 20ch;
+          }
+        }
+      }
+    }
+    .formControl {
+      & label,
+      & div {
+        color: lightblue;
+      }
+    }
+  }
+}
