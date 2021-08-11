@@ -6,7 +6,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import Alert from "../../components/Alert";
 
 const Details = props => {
-  const basePath = "http://jsonplaceholder.typicode.com";
+  const basePath = "https://jsonplaceholder.typicode.com";
   const id = props?.match?.params?.id;
   const { data, error } = useFetch(`${basePath}/users/${id}`);
 

@@ -10,7 +10,7 @@ const Users = () => {
   const [searchVal, setSearchVal] = React.useState("");
   const [usersList, setUsersList] = React.useState(null);
   const [filtered, setFiltered] = React.useState(null);
-  const { data, error } = useFetch("http://jsonplaceholder.typicode.com/users");
+  const { data, error } = useFetch("https://jsonplaceholder.typicode.com/users");
 
   useEffect(() => {
     if (data) {
