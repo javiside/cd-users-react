@@ -1,18 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import {
+  AppBar,
+  Toolbar,
+  Breadcrumbs,
+  Typography,
+  InputBase,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from "@material-ui/core";
+
+import { usersActions } from "../store/users";
+
 import styles from "./Header.module.scss";
 
-export default function Header({ user, selected, handleSort, searchVal, handleSearch }) {
-  const Wrapper = user ? Link : Typography;
+export default function Header() {
+  const [inputVal, setInputVal] = useState("");
+  const [selectVal, setSelectVal] = useState("name");
+
+  const { fetchedUsers, currentUserName } = useSelector((state) => state.users);
+
+  const dispatch = useDispatch();
+
+  const handleSearch = (e) => {
+    setInputVal(e.target.value);
+  };
+
+  const handleSort = (e) => {
+    setSelectVal(e.target.value);
+  };
+
+  useEffect(() => {
+    if (fetchedUsers) {
+      dispatch(usersActions.filterUsers({ inputVal }));
+      dispatch(usersActions.sortUsers({ selectVal }));
+    }
+  }, [dispatch, fetchedUsers, inputVal, selectVal]);
+
+  useEffect(() => {
+    if (fetchedUsers) {
+      dispatch(usersActions.sortUsers({ selectVal }));
+    }
+  }, [dispatch, fetchedUsers, selectVal]);
+
+  const Wrapper = currentUserName ? Link : Typography;
   return (
     <div className={styles.appBar}>
       <AppBar position="static">
@@ -21,15 +55,18 @@ export default function Header({ user, selected, handleSort, searchVal, handleSe
             <Breadcrumbs
               aria-label="breadcrumb"
               separator="›"
-              classes={{ root: styles.breadcrumbs, separator: styles.separator }}
+              classes={{
+                root: styles.breadcrumbs,
+                separator: styles.separator,
+              }}
             >
               <Wrapper className={styles.link} to="/">
                 Users
               </Wrapper>
-              {user && <Typography>{user}</Typography>}
+              {currentUserName && <Typography>{currentUserName}</Typography>}
             </Breadcrumbs>
           </Typography>
-          {!user && (
+          {!currentUserName && (
             <span className={styles.actions}>
               <div className={styles.search}>
                 <InputBase
@@ -39,13 +76,13 @@ export default function Header({ user, selected, handleSort, searchVal, handleSe
                     input: styles.input,
                   }}
                   inputProps={{ "aria-label": "search" }}
-                  value={searchVal}
+                  value={inputVal}
                   onChange={handleSearch}
                 />
               </div>
               <FormControl className={styles.formControl}>
                 <InputLabel>Sort by</InputLabel>
-                <Select value={selected} onChange={handleSort}>
+                <Select value={selectVal} onChange={handleSort}>
                   <MenuItem value={"name"}>Name</MenuItem>
                   <MenuItem value={"username"}>UserName</MenuItem>
                   <MenuItem value={"email"}>Email</MenuItem>

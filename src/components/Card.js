@@ -1,9 +1,12 @@
 import React from "react";
-import { default as MUCard } from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import styles from "./Card.module.scss";
+import {
+  Card as MUCard,
+  CardHeader,
+  CardContent,
+  Typography,
+} from "@material-ui/core";
+
+import styles from "./Cards.module.scss";
 
 export default function Card({ data, title }) {
   return (
